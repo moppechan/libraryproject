@@ -54,9 +54,9 @@ import util.GenerateSalt;
 
 public class libraryDAO{
 	// 送信元のユーザの情報等を定数で設定する。
-	private static final String FROM = "i.chiba.sys22@morijyobi.ac.jp";
-	private static final String NAME = "Book Laboratory";
-	private static final String PW = "ymibavywcouwvlco";
+	private static final String FROM = "mailtest.chiba.1st@gmail.com";
+	private static final String NAME = "Tibazon";
+	private static final String PW = "auoiugbbmnexzovb";
 	private static final String CHARSET = "UTF-8";
 		
 		// 宛先、件名、本文を引数にメールを送信するメソッド
@@ -110,6 +110,58 @@ public class libraryDAO{
 		}
 		
 	}
+	
+	public static void sendMail2(String to, String subject,String text) {
+		Properties property = new Properties();
+
+		// 各種プロパティの設定
+		property.put("mail.smtp.auth", "true");
+		property.put("mail.smtp.starttls.enable", "true");
+		property.put("mail.smtp.host", "smtp.gmail.com");
+		property.put("mail.smtp.port", "587");
+		property.put("mail.smtp.debug", "true");
+
+			// ログイン情報の取得
+		Session session = Session.getInstance(property,new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(FROM,PW);
+			}
+		});
+
+		try{
+			// 送信するメール本体のインスタンス
+			MimeMessage message = new MimeMessage(session);
+
+			// 送信元の設定
+			// 第1引数：送信元アドレス
+			// 第2引数：送信者名
+			message.setFrom(new InternetAddress(FROM, NAME));
+
+			// 送信先の設定
+			// 第1引数：TO,CC,BCCの区分
+			// 第2引数：送信先アドレス
+			Address toAddress = new InternetAddress(to);
+			message.setRecipient(Message.RecipientType.TO, toAddress);
+			// message.setRecipient(Message.RecipientType.CC, toAddress);
+			// message.setRecipient(Message.RecipientType.BCC, toAddress);
+
+			// 件名と本文の設定
+			message.setSubject(subject, CHARSET);
+			message.setText(text, CHARSET);
+
+			// 送信実行！
+			Transport.send(message);
+
+			System.out.println("メール送信完了！");
+
+		} catch (MessagingException e){
+			e.printStackTrace();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	
 	
 	private static Connection getConnection() throws URISyntaxException, SQLException {
 		try {
@@ -387,11 +439,7 @@ public class libraryDAO{
 	}
 	
 	public static List<book> CanReviewBookList(account user){
-		String sql="""
-				select bo.book_id, bo.book_name, bo.isbn,bo.URL from book as bo
-				join lendbook as len on bo.book_id=len.book_id
-				where len.user_id=?;
-				""";
+		String sql="select bo.book_id, bo.book_name, bo.isbn,bo.URL from book as bo join lendbook as len on bo.book_id=len.book_id where len.user_id=?";
 		List<book> result=new ArrayList<>();
 		try (
 				Connection con = getConnection();
@@ -419,14 +467,7 @@ public class libraryDAO{
 	}
 	
 	public static List<reviewList> ReviewList(account user){
-		String sql="""
-				select distinct bo.book_name, bo.author_name, bo.isbn, bo.URL,ca.category, re.point,  re.comment_title, re.comment, re.review_date from book as bo 
-				join lendbook as len on bo.book_id =len.book_id
-				join account as ac on ac.id=len.user_id
-				join review as re on re.isbn=bo.isbn
-				join category as ca on ca.category_id=bo.category_id
-				where re.user_id=?
-				""";
+		String sql="select distinct bo.book_name, bo.author_name, bo.isbn, bo.URL,ca.category, re.point,  re.comment_title, re.comment, re.review_date from book as bo  join lendbook as len on bo.book_id =len.book_id join account as ac on ac.id=len.user_id join review as re on re.isbn=bo.isbn join category as ca on ca.category_id=bo.category_id where re.user_id=?";
 		
 		List<reviewList> result=new ArrayList<>();
 		try (
@@ -459,15 +500,7 @@ public class libraryDAO{
 	}
 	
 	public static List<reviewList> LendNow4List(account user){
-		String sql="""
-				select distinct name, bo.book_name, bo.author_name, bo.isbn, bo.URL,ca.category, re.point,  re.comment_title, re.comment, re.review_date  from book as bo 
-				join lendbook as len on bo.book_id =len.book_id
-				join account as ac on ac.id=len.user_id
-				join review as re on re.user_id=ac.id
-				join category as ca on ca.category_id=bo.category_id
-				where re.user_id=? and len.return_date is null
-				Limit 4 offset 0
-				""";
+		String sql="select distinct ac.name, bo.book_name, bo.author_name, bo.isbn, bo.URL,ca.category, re.point,  re.comment_title, re.comment, re.review_date  from book as bo  join lendbook as len on bo.book_id =len.book_id join account as ac on ac.id=len.user_id join review as re on re.user_id=ac.id join category as ca on ca.category_id=bo.category_id where re.user_id=? and len.return_date is null Limit 4 offset 0";
 		
 		List<reviewList> result=new ArrayList<>();
 		try (
@@ -501,11 +534,7 @@ public class libraryDAO{
 	}
 	
 	public static List<book> HighPointBook(){
-		String sql="""
-				select bo.book_name, url from book as bo
-				join review as re on bo.isbn=re.isbn
-				order by point desc limit 4 offset 0
-				""";
+		String sql="select bo.book_name, url from book as bo join review as re on bo.isbn=re.isbn order by point desc limit 4 offset 0";
 		List<book> result=new ArrayList<>();
 		try (
 				Connection con = getConnection();
@@ -577,11 +606,7 @@ public class libraryDAO{
 	}
 	
 	public static List<reviewList> GetBookInfoByIsbn(String isbn){
-		String sql="""
-				select bo.book_name, bo.author_name, bo.URL, ca.category from book as bo
-				join category as ca on ca.category_id=bo.category_id
-				where bo.isbn=?
-				""";
+		String sql="select bo.book_name, bo.author_name, bo.URL, ca.category from book as bo join category as ca on ca.category_id=bo.category_id where bo.isbn=?";
 		List<reviewList> result=new ArrayList<>();
 		
 		try (
@@ -631,6 +656,39 @@ public class libraryDAO{
 			e.printStackTrace();
 		} finally {
 			System.out.println(result + "件更新しました。");
+		}
+		return result;
+	}
+	
+	public static List<reviewList> GetReviewByIsbn(String isbn){
+		String sql="select ac.name, bo.book_name, bo.author_name, bo.isbn, bo.URL,ca.category, re.point,  re.comment_title, re.comment, re.review_date from book as bo join lendbook as len on bo.book_id =len.book_id join account as ac on ac.id=len.user_id join review as re on re.isbn=bo.isbn join category as ca on ca.category_id=bo.category_id where re.isbn=?";
+		List<reviewList> result=new ArrayList<>();
+		
+		try (
+				Connection con = getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				){
+				pstmt.setString(1,isbn);
+				try (ResultSet rs = pstmt.executeQuery()){
+				
+					while(rs.next()) {
+						String userName=rs.getString("name");
+						String bookName=rs.getString("book_name");
+						String authorName=rs.getString("author_name");
+						String url=rs.getString("URL");
+						String category=rs.getString("category");
+						int point=rs.getInt("point");
+						String comTitle=rs.getString("comment_title");
+						String comment=rs.getString("comment");
+						String reviewDate=rs.getString("review_date");
+						reviewList reviewinfo=new reviewList(userName,bookName,authorName,isbn,url,category,point,comTitle,comment,reviewDate);				
+						result.add(reviewinfo);
+					}
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}catch (URISyntaxException e) {
+			e.printStackTrace();
 		}
 		return result;
 	}

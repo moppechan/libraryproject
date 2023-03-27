@@ -19,7 +19,7 @@ import dto.reviewList;
 import util.GenerateHashedPw;
 
 /**
- * Servlet implementation class Login2servlet
+ * Servlet implementation class LoginExcuteServlet
  */
 @WebServlet("/LoginExcuteServlet")
 public class LoginExcuteServlet extends HttpServlet {

@@ -11,7 +11,6 @@
 <title>Book Laboratory</title>
 <link rel="stylesheet" href="css/review.css">
 </head>
-<body>
 <body bgcolor="#F2FDFF">
   <header>
     <div class="header">

@@ -58,7 +58,6 @@ public class ReviewWrite2Servlet extends HttpServlet {
 		path="WEB-INF/view/mypage.jsp";
 		RequestDispatcher dispatcher=request.getRequestDispatcher(path);
 		dispatcher.forward(request, response);
-		
 	}
 
 	/**

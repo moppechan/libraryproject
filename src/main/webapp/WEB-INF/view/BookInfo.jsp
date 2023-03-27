@@ -2,13 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.List" %>
 <%@page import="java.util.ArrayList" %>
-<%@page import="dto.book" %>
+<%@page import="dto.reviewList" %>
+<%@page import="dto.account" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Book Laboratory</title>
-<link rel="stylesheet" href="css/mypage.css">
+<link rel="stylesheet"href="css/bookinfo.css">
 </head>
 <body bgcolor="#F2FDFF">
   <header>
@@ -37,32 +38,42 @@
   		<a class="linebox_c" href="./LogoutServlet">ログアウト</a>
   	</div>
   </div>
+<%
+	List<reviewList> list=(List<reviewList>)session.getAttribute("ReviewBookInfo");
+	int point=(int)session.getAttribute("BookPoint");
+	
+	for(reviewList info:list){
+%>
+	<div class="category">
+		<a style="font-size:2.4rem"><%=info.getCategory() %></a>
+	</div>
+	<div class="bookimg">
+		<img src="data:image/png;base64,<%=info.getUrl() %>"width="200" height="274">
+	</div>
+	<div class="bookinfo">
+		<a class="bookname"><%=info.getBookName() %></a><br>
+		<a styl="font-size:2rem"class="authorname"><%=info.getAuthorName() %></a><br>
+		<a styl="font-size:2rem"class="infotext">評価：<%=point %>.0/5.0</a><br>
+	</div>
+<%} %>
+<h2>・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・</h2>
 <div class="kutikomi">
-<p style="font-size: 2rem;">口コミ投稿可能な本</p>
+<p style="font-size: 2rem;">この本の口コミ</p>
 </div>
 <div style="overflow: auto;" class="kutikomi_itiran_box1">
 <%
-	List<book> booklist=(List<book>)session.getAttribute("CanReviewList");
-	for(book bo : booklist){
+	List<reviewList> reviewlist=(List<reviewList>)session.getAttribute("BookInfoByIsbn");
+	for(reviewList review : reviewlist){
 %>
-        <table style="border-collapse: collapse; border-spacing: 80px;" align="left">
-        	<tr>
-        		<td class="kutikomi_img">
-            		<img src="data:image/png;base64,<%=bo.getURL() %>" alt=""width="180" height="254">
-        		</td>
-        	</tr>
-      	</table>
       <table style="border-collapse: collapse; border-spacing: 80px;" class="kutikomi_text">
         <tr class="border">
-            <td class="max-width" valign="top">
-   				<a style="font-size: 2.5rem;" class="book_title"><%=bo.getBook_name() %></a><br>
-   				<a style="font-size: 3rem;" class="book_kutikomi_text2" href="./ReviewWriteServlet?isbn=<%=bo.getIsbn()%>">
-   				この本の口コミを書く
-   				</a>
+            <td class="max-width" valign="top"style="">
+   				<p style="font-size: 2rem;" class="book_title"><%=review.getBookName() %></p>
+     			<p style="font-size: 1.2rem;" class="book_kutikomi_text"><%=review.getComment()%></p>
             </td>
          </tr>
       </table>
 <%} %>
-</div>
+
 </body>
 </html>

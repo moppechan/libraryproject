@@ -59,4 +59,5 @@
     <a href="" class="btn btn--orange" >本の詳細ページ</a> 
     </div>
          
-  </body>
+</body>
+</html>
