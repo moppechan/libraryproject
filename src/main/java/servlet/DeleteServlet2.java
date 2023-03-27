@@ -63,8 +63,6 @@ public class DeleteServlet2 extends HttpServlet {
 			dispatcher.forward(request, response);
 			return;
 		}
-		
-		
 	}
 
 	/**

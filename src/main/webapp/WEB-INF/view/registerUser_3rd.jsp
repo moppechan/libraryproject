@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>Book Labolatory</title>
 <link rel="stylesheet"href="css/register3.css">
-<title>Book Laboratory</title>
 </head>
 <body>
 <%

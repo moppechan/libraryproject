@@ -40,11 +40,9 @@ public class RegisterUser2Servlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}else{
 			String subject="本人確認用URL";
-			String urlStr="http://localhost:8080/projectlibrary/RegisterUser3Servlet?email=";
+			String urlStr="http://localhost:8080/libraryproject/RegisterUser3Servlet?email=";
 			String url=urlStr.concat(email);
-			String text="""
-					こちらのURLにアクセスし、新規登録の手続きをお願いします。
-					""";
+			String text="こちらのURLにアクセスし、新規登録の手続きをお願いします。";
 			URL URL=new URL(url);
 			libraryDAO.sendMail(email, subject,text, URL);
 			String path="WEB-INF/view/registerUser_2nd.jsp";

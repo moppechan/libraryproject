@@ -8,7 +8,6 @@
 <link rel="stylesheet"href="css/delete.css">
 </head>
 <body>
-
 <header>
     <div class="header">
     	<div class="center">
@@ -26,6 +25,5 @@
 </form>
 <br>
 <a class="button_a"href="./HomeServlet" >戻る</a>
-
 </body>
 </html>

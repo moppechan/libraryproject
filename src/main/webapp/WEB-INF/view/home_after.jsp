@@ -12,6 +12,7 @@
 <title>Book Laboratory</title>
 <link rel="stylesheet" href="css/menu2.css">
 </head>
+<body>
 <body bgcolor="#F2FDFF">
 
   <header>

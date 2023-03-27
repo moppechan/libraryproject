@@ -14,6 +14,7 @@ import java.util.List;
 
 import dto.account;
 import dto.book;
+import dto.category;
 import dto.lendbook;
 public class bookDAO {
 	private static Connection getConnection() throws URISyntaxException, SQLException {
@@ -220,7 +221,27 @@ public class bookDAO {
 				    now = now.plusDays(14);
 				}
 				return now;
-			}
-		}
+	            }
+				
+				public List<category> getAllCategories() throws SQLException {
+			        List<category> categories = new ArrayList<>();
+			        String sql = "SELECT * FROM category";
+			        try (Connection con = getConnection();
+			             PreparedStatement stmt = con.prepareStatement(sql);
+			             ResultSet rs = stmt.executeQuery()) {
+			            while (rs.next()) {
+			                int id = rs.getInt("id");
+			                String name =  rs.getString("name");
+			                category category = new category(id, name);
+			                categories.add(category);
+			            }
+			        }catch (SQLException e) {
+			    		e.printStackTrace();
+				    } catch (URISyntaxException e) {
+						e.printStackTrace();
+			        } 
+			        return categories;
+			    }
+}
 					
 

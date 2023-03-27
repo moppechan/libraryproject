@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
+<%@page import="java.util.List" %>
+<%@page import="java.util.ArrayList" %>
 <%@page import="dto.book" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Book Laboratory</title>
-<link rel="stylesheet" href="css/mypage.css"
+<link rel="stylesheet" href="css/mypage.css">
 </head>
-<body>
 <body bgcolor="#F2FDFF">
   <header>
     <div class="header">

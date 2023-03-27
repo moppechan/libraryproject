@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <link rel="stylesheet" href="css/search_result.css">
+ <link rel="stylesheet" href="css/search_result2.css">
 </head>
 <body bgcolor="#F2FDFF">
   <header>
@@ -25,8 +25,15 @@
 </div>
   </div>
  <div class="box2">
- <p class="search_Word" style="font-size: 1.2rem;">検索ワード</p>
- <p class="search_text" style="font-size: 1.2rem;">・ドラゴンボール</p>
+ <p class="search_Word" style="font-size: 1.4rem;">検索ワード</p>
+ <div class="tate_narabi">
+ <p class="search_text" style="font-size: 1.4rem;">本の題名:</p>
+ <p class="search_text2" style="font-size: 1.4rem;">本の作者:</p>
+ </div>
+ <div class="tate_narabi">
+<p class="search_text" style="font-size: 1.4rem;">ISBN:</p>
+ <p class="search_text2" style="font-size: 1.4rem;">出版社:</p>
+ </div>
  </div>
  <div class="box3">
  <p>検索結果*件ヒット</p>
@@ -58,5 +65,5 @@
     </div>
     <a href="" class="btn btn--orange" >本の詳細ページ</a> 
     </div>
-         
   </body>
+</html>
