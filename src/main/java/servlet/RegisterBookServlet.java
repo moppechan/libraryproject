@@ -28,7 +28,7 @@ public class RegisterBookServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path="WEB-INF/view/registerbook_1st.jsp";
-		RequestDispatcher dispatcher=request.getRequestDispatcher(path);
+		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 		dispatcher.forward(request, response);
 	}
 

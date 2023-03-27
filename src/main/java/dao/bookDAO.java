@@ -32,6 +32,10 @@ public class bookDAO {
 	}
 	
 	public static int registerbook(book bo) {
+		String LocaldateStr=bo.getPub_date();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate localdate=LocalDate.parse(LocaldateStr, formatter);
+		java.sql.Date date=java.sql.Date.valueOf(localdate);
 		String sql = "INSERT INTO book VALUES(default, ?, ?, ?, ?, ?, ?, 0, ?, ?)";
 		int result = 0;
 		
@@ -42,7 +46,7 @@ public class bookDAO {
 			pstmt.setString(1, bo.getBook_name());
 			pstmt.setString(2, bo.getAuthor_name());
 			pstmt.setString(3, bo.getPublisher());
-			pstmt.setString(4, bo.getPub_date());
+			pstmt.setDate(4, date);
 			pstmt.setString(5, bo.getIsbn());
 			pstmt.setInt(6, bo.getCategory_id());
 			pstmt.setInt(7, bo.getBrand_check());
@@ -149,15 +153,29 @@ public class bookDAO {
 		    }
 		    
 		    public static int Rendbook(lendbook le) {
+		    	String LocaldateStr=le.getLend_date();
+		    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		    	LocalDate localdate=LocalDate.parse(LocaldateStr, formatter);
+		    	java.sql.Date lend_date=java.sql.Date.valueOf(localdate);
+		    	
+		    	String LocaldateSt=le.getReturn_date();
+		    	DateTimeFormatter forma = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		    	LocalDate lodate=LocalDate.parse(LocaldateSt, forma);
+		    	java.sql.Date return_date=java.sql.Date.valueOf(lodate);
+		    	
+		    	String LocaldateS=le.getDelay_date();
+		    	DateTimeFormatter formatt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		    	LocalDate caldate=LocalDate.parse(LocaldateS, formatt);
+		    	java.sql.Date delay_date=java.sql.Date.valueOf(caldate);
 		    	int result = 0;
 		    	String sql = "INSERT INTO lendbook VALUES (default, ?, ?, ?, ?, ?)";
 		      
 		        try (Connection con = getConnection();
 		        	 PreparedStatement ps = con.prepareStatement(sql)
 		        	){           
-		                    ps.setString(1, le.getLend_date());
-		                    ps.setString(2, le.getReturn_date());
-		                    ps.setString(3, le.getDelay_date());
+		                    ps.setDate(1, lend_date);
+		                    ps.setDate(2, return_date);
+		                    ps.setDate(3, delay_date);
 		                    ps.setInt(4, le.getUser_id());
 		                    ps.setInt(5, le.getBook_id());
 		                    
