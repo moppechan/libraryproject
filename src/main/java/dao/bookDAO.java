@@ -230,10 +230,10 @@ public class bookDAO {
 			             PreparedStatement stmt = con.prepareStatement(sql);
 			             ResultSet rs = stmt.executeQuery()) {
 			            while (rs.next()) {
-			                int id = rs.getInt("id");
-			                String name =  rs.getString("name");
-			                category category = new category(id, name);
-			                categories.add(category);
+			                int category_id = rs.getInt("category_id");
+			                String category =  rs.getString("category");
+			                category cate = new category(category_id, category);
+			                categories.add(cate);
 			            }
 			        }catch (SQLException e) {
 			    		e.printStackTrace();
@@ -242,6 +242,26 @@ public class bookDAO {
 			        } 
 			        return categories;
 			    }
+				public static int registercategory(category ca) {
+					String sql = "INSERT INTO category VALUES(default, ?)";
+					int result = 0;
+					
+					try (
+							Connection con = getConnection();
+							PreparedStatement pstmt = con.prepareStatement(sql);
+							){
+							pstmt.setString(1, ca.getCategory());
+							
+							result = pstmt.executeUpdate();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					} catch (URISyntaxException e) {
+						e.printStackTrace();
+					} finally {
+						System.out.println(result + "件更新しました。");
+					}
+					return result;
+				}
 }
 					
 
