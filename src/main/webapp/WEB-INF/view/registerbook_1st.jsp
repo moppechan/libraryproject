@@ -24,6 +24,7 @@
 		著者：<input type="text" name="author"><br>
 		出版日：<input type="date" name="pubdate"><br>
 		ISBN番号：<input type="text" name="isbn"><br>
+		<label for="category">カテゴリー：</label>
 		<select name="category">
 		<option value="">選択してください</option>	
 	      <%
@@ -32,8 +33,8 @@
 	      %>
                 <option value="<%= cate.getCategory_id() %>"><%= cate.getCategory() %></option>
             <% } %>
-	    </select>
-		表示画像：<input type="file" name="url"><br>
+	    </select><br>
+		表示画像：<input type="file" name="file" accept=".png"><br>
 		<input type="submit" value="登録">
 		<a href="AdminHomeServlet">戻る</a>
 	</form>
@@ -47,6 +48,7 @@
 		著者：<input type="text" name="author"><br>
 		出版日：<input type="date" name="pubdate"><br>
 		ISBN番号：<input type="text" name="isbn"><br>
+		<label for="category">カテゴリー：</label>
 		<select name="category">
 		<option value="">選択してください</option>	
 	       <%
@@ -55,8 +57,8 @@
 	      %>
                 <option value="<%= cate.getCategory_id() %>"><%= cate.getCategory() %></option>
             <% } %>
-	    </select>
-		表示画像：<input type="file" name="url" accept=".png"><br>
+	    </select><br>
+		表示画像：<input type="file" name="file" accept=".png"><br>
 		<input type="submit" value="登録">
 		<a href="AdminHomeServlet">戻る</a>
 	</form>
