@@ -1,8 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,19 +12,18 @@ import javax.servlet.http.HttpSession;
 
 import dao.bookDAO;
 import dto.account;
-import dto.lendbook;
 
 /**
- * Servlet implementation class LendBook3Servlet
+ * Servlet implementation class ReturnBook2Servlet
  */
-@WebServlet("/LendBook3Servlet")
-public class LendBook3Servlet extends HttpServlet {
+@WebServlet("/ReturnBook2Servlet")
+public class ReturnBook2Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LendBook3Servlet() {
+    public ReturnBook2Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,29 +32,14 @@ public class LendBook3Servlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-		account ac = (account) session.getAttribute("input_data");
+		request.setCharacterEncoding("UTF-8");
+		String mail = request.getParameter("mail");
+		account ac = (account) bookDAO.getAccountBymail(mail);
+		session.setAttribute("input_data", ac);
 		
-		int userid = ac.getId();
-		String idb = request.getParameter("id");
-		int bookid = Integer.parseInt(idb);
-		int brand = bookDAO.getbrand(bookid);
-		LocalDate lenddate = LocalDate.now();
-		String lend_date = lenddate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		LocalDate delaydate = bookDAO.getdelaydate(brand);
-		String delay_date = delaydate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		String returndate = null;
-		lendbook lend = new lendbook(0, lend_date, returndate, delay_date, userid, bookid);
-		int result = bookDAO.Lendbook(lend);
-		String path = "";
-		
-		if(result==1) {
-			path="WEB-INF/view/lendbook_success.jsp";
-		}else {
-			path="WEB-INF/view/lendbook_fail.jsp";
-		}
-		RequestDispatcher dispatcher=request.getRequestDispatcher(path);
+		String path = "WEB-INF/view/returnbook_2nd.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 		dispatcher.forward(request, response);
 	}
 
