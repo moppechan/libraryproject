@@ -23,9 +23,9 @@ import javax.mail.internet.MimeMessage;
 import dto.account;
 
 public class SendMailDAO{
-	private static final String FROM = "i.chiba.sys22@morijyobi.ac.jp";
+	private static final String FROM = "mailtest.chiba.1st@gmail.com";
 	private static final String NAME = "Tibazon";
-	private static final String PW = "ymibavywcouwvlco";
+	private static final String PW = "auoiugbbmnexzovb";
 	private static final String CHARSET = "UTF-8";
 	
 	private static Connection getConnection() throws URISyntaxException, SQLException {

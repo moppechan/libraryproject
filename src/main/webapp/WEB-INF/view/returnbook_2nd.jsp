@@ -12,11 +12,9 @@
    account ac = (account)session.getAttribute("input_data");
 %>
 	<p><%=ac.getMail() %>さん</p>
-	<h1>貸し出す本のIDを入力してください</h1>
-	<form action="LendBook3Servlet" method="get">
+	<h1>返却する本のIDを入力してください</h1>
+	<form action="ReturnBook3Servlet" method="post">
 	<input type="text" name="id" placeholder="id"><br>
-	<input type="submit" value="貸出">
+	<input type="submit" value="返却">
 	<a href="LendBookServlet">戻る</a>
-	</form>
-</body>
 </html>

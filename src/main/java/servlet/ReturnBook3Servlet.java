@@ -17,16 +17,16 @@ import dto.account;
 import dto.lendbook;
 
 /**
- * Servlet implementation class LendBook3Servlet
+ * Servlet implementation class ReturnBook3Servlet
  */
-@WebServlet("/LendBook3Servlet")
-public class LendBook3Servlet extends HttpServlet {
+@WebServlet("/ReturnBook3Servlet")
+public class ReturnBook3Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LendBook3Servlet() {
+    public ReturnBook3Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,24 +38,18 @@ public class LendBook3Servlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		account ac = (account) session.getAttribute("input_data");
-		
-		int userid = ac.getId();
-		String idb = request.getParameter("id");
-		int bookid = Integer.parseInt(idb);
-		int brand = bookDAO.getbrand(bookid);
-		LocalDate lenddate = LocalDate.now();
-		String lend_date = lenddate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		LocalDate delaydate = bookDAO.getdelaydate(brand);
-		String delay_date = delaydate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		String returndate = null;
-		lendbook lend = new lendbook(0, lend_date, returndate, delay_date, userid, bookid);
-		int result = bookDAO.Lendbook(lend);
+		LocalDate returndate = LocalDate.now();
+		String return_date = returndate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		String book = request.getParameter("id");
+		int book_id = Integer.parseInt(book);
+		lendbook le = new lendbook(0,null,return_date,null,0,0);
+		int result = bookDAO.Returnbook(le, book_id);
 		String path = "";
 		
 		if(result==1) {
-			path="WEB-INF/view/lendbook_success.jsp";
+			path="WEB-INF/view/returnbook_success.jsp";
 		}else {
-			path="WEB-INF/view/lendbook_fail.jsp";
+			path="WEB-INF/view/returnbook_fail.jsp";
 		}
 		RequestDispatcher dispatcher=request.getRequestDispatcher(path);
 		dispatcher.forward(request, response);

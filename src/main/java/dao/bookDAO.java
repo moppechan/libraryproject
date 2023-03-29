@@ -37,7 +37,7 @@ public class bookDAO {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate localdate=LocalDate.parse(LocaldateStr, formatter);
 		java.sql.Date date=java.sql.Date.valueOf(localdate);
-		String sql = "INSERT INTO book VALUES(default, ?, ?, ?, ?, ?, ?, 0, ?, ?)";
+		String sql = "INSERT INTO book VALUES(default, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int result = 0;
 		
 		try (
@@ -153,16 +153,12 @@ public class bookDAO {
 				return null;
 		    }
 		    
-		    public static int Rendbook(lendbook le) {
+		    public static int Lendbook(lendbook le) {
 		    	String LocaldateStr=le.getLend_date();
 		    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		    	LocalDate localdate=LocalDate.parse(LocaldateStr, formatter);
 		    	java.sql.Date lend_date=java.sql.Date.valueOf(localdate);
 		    	
-		    	String LocaldateSt=le.getReturn_date();
-		    	DateTimeFormatter forma = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		    	LocalDate lodate=LocalDate.parse(LocaldateSt, forma);
-		    	java.sql.Date return_date=java.sql.Date.valueOf(lodate);
 		    	
 		    	String LocaldateS=le.getDelay_date();
 		    	DateTimeFormatter formatt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -175,7 +171,7 @@ public class bookDAO {
 		        	 PreparedStatement ps = con.prepareStatement(sql)
 		        	){           
 		                    ps.setDate(1, lend_date);
-		                    ps.setDate(2, return_date);
+		                    ps.setDate(2, null);
 		                    ps.setDate(3, delay_date);
 		                    ps.setInt(4, le.getUser_id());
 		                    ps.setInt(5, le.getBook_id());
@@ -192,7 +188,7 @@ public class bookDAO {
               }   
 		    public static int getbrand(int ID) {
 		    	int brand_check = 1;
-				String sql = "SELECT brand_check FROM book WHERE id = ?";
+				String sql = "SELECT brand_check FROM book WHERE book_id = ?";
 				try (Connection con = getConnection();
 					 PreparedStatement ps = con.prepareStatement(sql)
 				     ){
@@ -262,6 +258,31 @@ public class bookDAO {
 					}
 					return result;
 				}
+				 public static int Returnbook(lendbook le, int id) {
+				    	String LocaldateStr=le.getReturn_date();
+				    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				    	LocalDate localdate=LocalDate.parse(LocaldateStr, formatter);
+				    	java.sql.Date return_date=java.sql.Date.valueOf(localdate);
+				    	int result = 0;
+				    	String sql = "UPDATE lendbook SET return_date = ? where book_id=?";
+				      
+				        try (Connection con = getConnection();
+				        	 PreparedStatement ps = con.prepareStatement(sql)
+				        	){           
+				                   
+				                    ps.setDate(1, return_date);
+				                    ps.setInt(2, id);
+				                    // データを追加
+				                    result = ps.executeUpdate();
+				                
+				            } catch (SQLException e) {
+				    			e.printStackTrace();
+				    		} catch (URISyntaxException e) {
+								e.printStackTrace();
+				    		} 
+				    		return result;
+		              }   
+				    	
 }
 					
 
