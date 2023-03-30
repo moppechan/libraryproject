@@ -5,10 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Book Laboratory</title>
+<link rel="stylesheet" href="css/completion.css">
 </head>
-<body>
-	<h1>登録が完了しました</h1>
-	<a href="AddCategoryServlet">もう一度</a>
-	<a href="AdminHomeServlet">ホームへ</a>
+<body bgcolor="#F2FDFF">
+	<h1 style="font-size:3rem;">登録が完了しました</h1>
+	<div class="yoko_narabi">
+		<a href="AdminHomeServlet" class="button_a">ホームへ</a>
+		<a href="AddCategoryServlet" class="button_a">もう一度</a>
+	</div>	
 </body>
 </html>
