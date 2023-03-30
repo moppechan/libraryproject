@@ -32,9 +32,9 @@ public class DeleteBook2Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String ida = request.getParameter("id");
-		int id = Integer.parseInt(ida);
+		int ID = Integer.parseInt(ida);
 		bookDAO book = new bookDAO();
-		int result = bookDAO.deletebook(id);
+		int result = bookDAO.deletebook(ID);
 		
 		String path ="";
 		if(result==1) {

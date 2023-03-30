@@ -102,7 +102,7 @@ public class bookDAO {
 			}
 
 		public static int deletebook(int ID) {
-			String sql = "DELETE FROM book WHERE id = ?";
+			String sql = "DELETE FROM book WHERE book_id = ?";
 			int result = 0;
 			try (
 				 Connection con = getConnection();	                   
