@@ -1,0 +1,73 @@
+@charset "UTF-8";
+body {
+	text-align: center;
+	background-color: #F2FDFF;
+}
+
+div {
+	margin-top: 50px;	
+}
+
+h1 {
+	font-size: 40pt;
+}
+
+.box {
+margin: 0 0 0 10px;
+	height: 80px;
+	width: 600px;
+}
+ 
+.button{
+    margin: 0 200px 0 10px ;
+	font-size     : 20pt;        /* 文字サイズ */
+	text-align    : center;      /* 文字位置   */
+	cursor        : pointer;     /* カーソル   */
+	padding       : 13px 21px;   /* 余白       */
+	background    : #6F89F1;     /* 背景色     */
+	color         : #ffffff;     /* 文字色     */
+	line-height   : center;         /* 1行の高さ  */
+	text-decoration: none;
+	border-bottom: none;
+	width: 100px;
+	height: 70px;
+}
+
+.sub {
+  display       : inline-block;
+  font-size     : 20pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 12px;   /* 余白       */
+  background    : #6F89F1;     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  width: 100px;
+  height: 70px;
+}
+.button_s{
+	display: flex;
+	justify-content: center;
+	width:150px;
+	height:40px;
+	background-color: #58ABFD;
+	border:2px solid #707070;
+	color: white;
+	font-size: 1.5rem;
+	text-decoration: none;
+	margin: 40px 0 0 450px;
+}
+.button_a{
+	display: flex;
+	justify-content: center;
+	width:150px;
+	height:40px;
+	background-color: #58ABFD;
+	border:2px solid #707070;
+	color: white;
+	font-size: 1.5rem;
+	text-decoration: none;
+	margin: 40px 0 0 100px;
+}
+.yoko_narabi{
+    display:flex;
+  }

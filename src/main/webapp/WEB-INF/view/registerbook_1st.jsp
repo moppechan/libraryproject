@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/registerbook.css">
+<link rel="stylesheet" href="css/regibook.css">
 <title>Book Laboratory</title>
 </head>
 <body>
