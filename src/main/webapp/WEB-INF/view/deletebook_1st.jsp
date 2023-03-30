@@ -15,8 +15,8 @@
 		<input type="text" name="id" class="box1" placeholder="ID" style="font-size:2.4rem;" ><br>
 		</div>
 			<div class="yoko_narabi">
-		<input type="submit" value="削除" class="button_s">
 		<a href="AdminHomeServlet" class="button_a">戻る</a>
+		<input type="submit" value="削除" class="button_s">
 		</div>
 	</form>
 </body>

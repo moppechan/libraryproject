@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+h1{
+	 text-align: center;
+	 margin-top: 100px;
+}
+
+.button_a{
+	display: flex;
+	justify-content: center;
+	width:150px;
+	height:40px;
+	background-color: #58ABFD;
+	border:2px solid #707070;
+	color: white;
+	font-size: 1.5rem;
+	text-decoration: none;
+	margin: 40px 0 0 300px;
+}
+
+.yoko_narabi{
+    display:flex;
+}
