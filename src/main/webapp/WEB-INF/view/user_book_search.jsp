@@ -36,12 +36,12 @@
     <option>選択肢のサンプル7</option>
 </select>
 </div>
-<form action="SearchResultServlet"method="post">
+<form action="SearchResultServlet"method="get">
 <div class="right">
 
-    <input class="search" type="search" placeholder="キーワードを入力してください">
+    <input class="search" type="text" name="search" placeholder="キーワードを入力してください">
 
-   <button class="search_button" href=""><img src="img/2.png" alt="" width="45" height="45"></button>
+   <input class="search_button"  type="submit" value="検索"><div class="megane"><img src="" alt="" width="45" height="45" ></div>
    
   </div>
   </div>
